@@ -1,10 +1,6 @@
-const express = require('express');
 
-const server = express();
+const server = require('./server');
 
-server.get('/', (req, res) => {
-  
-  res.send('Hello World');
-});
-
-server.listen(8000, () => console.log('API running on port 8000'));
+server.listen(8000, () => {
+    console.log('\n* Server Running on http://localhost:8000 *\n');
+})
