@@ -5,6 +5,21 @@ const projects = require("../data/helpers/projectModel");
 const router = express.Router();
 
 
+
+router.get("/", (req, res) => {
+    projects.find(req.query)
+    .then(pro => {
+        res.status(200).json(pro);
+    }) 
+    .catch(err => {
+        res.status(500).json({
+            message: "Error retrieving Projects", err
+        });
+    })
+}) 
+
+
+
 router.get('/:id', validateAction, (req, res) => {
     projects.getProjectActions(req.params.id)
     .then(pro => {
@@ -29,34 +44,8 @@ router.post('/', (req, res) =>{
  });
 
 
-router.get("/", (req, res) => {
-    projects.find(req.query)
-    .then(pro => {
-        res.status(200).json(pro);
-    }) 
-    .catch(err => {
-        res.status(500).json({
-            message: "Error retrieving Projects", err
-        });
-    })
-}) 
 
 
-
-
-router.delete('/:id', (req, res) => {
-    projects.remove(req.params.id)
-    .then(pro => {
-        if(pro > 0){
-            res.status(200).json({ message: "The Project is deleted"});
-        } else {
-            res.status(404).json({ message: "The Project could not be found"});
-        }
-    })
-    .catch(err => {
-        res.status(500).json({ message: 'Error removing the Project', err})
-    })
-})
 
 
 router.put('/:id', (req, res) => {
@@ -74,6 +63,23 @@ router.put('/:id', (req, res) => {
         res.status(500).json({
             message: "error updating the Project"
         })
+    })
+})
+
+
+
+
+router.delete('/:id', (req, res) => {
+    projects.remove(req.params.id)
+    .then(pro => {
+        if(pro > 0){
+            res.status(200).json({ message: "The Project is deleted"});
+        } else {
+            res.status(404).json({ message: "The Project could not be found"});
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ message: 'Error removing the Project', err})
     })
 })
 
