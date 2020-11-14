@@ -7,7 +7,7 @@ const router = express.Router();
 
 
 router.get("/", (req, res) => {
-    projects.find(req.query)
+    projects.get()
     .then(pro => {
         res.status(200).json(pro);
     }) 
@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 
 
 
-router.get('/:id', validateAction, (req, res) => {
+router.get('/:project_id', validateAction, (req, res) => {
     projects.getProjectActions(req.params.id)
     .then(pro => {
       res.status(200).json(pro)
@@ -47,7 +47,7 @@ router.post('/', (req, res) =>{
 
 
 
-router.put('/:id', (req, res) => {
+router.put('/:project_id', (req, res) => {
     const changes = req.body;
 
     projects.update(req.params.id, changes)
@@ -68,7 +68,7 @@ router.put('/:id', (req, res) => {
 
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:project_id', (req, res) => {
     projects.remove(req.params.id)
     .then(pro => {
         if(pro > 0){
