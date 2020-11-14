@@ -33,6 +33,8 @@ router.get('/:id', validateAction, (req, res) => {
     })
   });
 
+
+
 router.post('/', (req, res) =>{
     projects.insert(req.body)
     .then(pro => {
@@ -42,9 +44,6 @@ router.post('/', (req, res) =>{
         res.status(500).json({ message: 'Error adding the project', err})
     })
  });
-
-
-
 
 
 
