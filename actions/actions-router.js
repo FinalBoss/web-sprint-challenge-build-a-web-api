@@ -32,7 +32,7 @@ router.post('/', (req, res) =>{
 
 
 
-router.put(':id', (req, res) => {
+router.put('/:id', (req, res) => {
     const changes = req.body;
 
     actions.update(req.params.id, changes)
